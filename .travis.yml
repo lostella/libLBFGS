@@ -1,0 +1,7 @@
+install: make
+language: c
+compiler: gcc
+install: make
+script:
+  - ./test_1
+
