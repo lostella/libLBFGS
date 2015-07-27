@@ -23,6 +23,7 @@ libLBFGS_buffer *   libLBFGS_init   (int n, int mem);
     Pushes a new pair (s, y) into the buffer, and discards the oldest one if
     necessary.
     Parameters:
+        libLBFGS_buffer * b: pointer to the buffer structure
         double * s: pointer to n-dimensional double vector, containing the
             difference between to points x and x'
         double * y: pointer to n-dimensional double vector, containing the
