@@ -53,8 +53,8 @@ void                libLBFGS_reset  (libLBFGS_buffer * b);
 
 /*
     Deallocates the given buffer structure: all the referenced memory locations
-    will be cleared, including the buffer itself, and the pointer will not be
-    usable any longer.
+    will be cleared, including the buffer itself, and the pointer will no longer
+    be usable.
     Parameters:
         libLBFGS_buffer * b: pointer to the buffer structure
 */
