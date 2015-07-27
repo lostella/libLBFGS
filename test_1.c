@@ -17,6 +17,11 @@ int main(void) {
     libLBFGS_push(b, s, y);
     libLBFGS_push(b, s, y);
     libLBFGS_push(b, s, y);
+    libLBFGS_reset(b);
+    libLBFGS_push(b, s, y);
+    libLBFGS_push(b, s, y);
+    libLBFGS_push(b, s, y);
+    libLBFGS_push(b, s, y);
     libLBFGS_push(b, s, y);
     // clear the buffer
     libLBFGS_clear(b);
