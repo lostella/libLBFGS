@@ -1,6 +1,6 @@
 language: c
 compiler: gcc
-install: make
 script:
+  - make
   - ./test_1
 
