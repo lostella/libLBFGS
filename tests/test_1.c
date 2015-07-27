@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "libLBFGS.h"
+#include "../libLBFGS.h"
 
 int main(void) {
     // take a pair (s, y)

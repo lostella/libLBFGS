@@ -4,8 +4,8 @@ CC=gcc
 
 all:	$(TESTS)
 
-test1:	$(SRC) test_1.c
-		$(CC) -o test_1 test_1.c $(SRC)
+test1:	$(SRC) tests/test_1.c
+		$(CC) -o tests/test_1 tests/test_1.c $(SRC)
 
 clean:
 		rm *.o
