@@ -3,13 +3,15 @@
 [![Build Status](https://travis-ci.org/lostella/libLBFGS.svg)](https://travis-ci.org/lostella/libLBFGS)
 
 `libLBFGS` is a small piece of C code implementing all that it's needed to compute
-limited-memory BFGS (also known as L-BFGS) directions when minimizing smooth functions. Basically, it implements
-the functions to allocate a buffer for some vectors to be stored, to push pairs of vectors
-`(s, y)` into the buffer, and to compute matrix vector products with the resulting 
-approximate inverse Hessian matrix.
+limited-memory BFGS (also known as L-BFGS) directions when minimizing smooth functions.
+
+It implements the functions to allocate a FIFO buffer for some vectors to be stored,
+to push pairs of vectors `(s, y)` into the buffer, and to compute matrix vector products
+with the resulting approximate inverse Hessian matrix.
 
 For more information about the L-BFGS method, see:
 
+* J. Nocedal, "Updating quasi-Newton matrices with limited storage," in *Mathematics of Computation*, vol. 35, issue 151, pp. 773-782 (1980).
 * D. Liu, J. Nocedal, "On the limited memory BFGS method for large scale optimization," in *Mathematical Programming*, vol. 45, pp. 503-528 (1989).
 
 The header file `libLBFGS.h` exposes the following routines:

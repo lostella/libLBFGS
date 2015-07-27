@@ -1,6 +1,11 @@
 language: c
 compiler: gcc
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -y valgrind
 script:
   - make
-  - tests/test_1
+  - valgrind tests/test_1
+notifications:
+  email: false
 
