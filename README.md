@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/lostella/libLBFGS.svg)](https://travis-ci.org/lostella/libLBFGS)
 
-`libLBFGS` is a small piece of C code implementing all that it's needed to compute
+`libLBFGS` is a small piece of C code implementing all that is needed to compute
 limited-memory BFGS (also known as L-BFGS) directions when minimizing smooth functions.
 
 It implements the functions to allocate a FIFO buffer for some vectors to be stored,
