@@ -2,5 +2,5 @@ language: c
 compiler: gcc
 script:
   - make
-  - tests/test_1
+  - sh test.sh
 
