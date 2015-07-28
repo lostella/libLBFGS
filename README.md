@@ -14,7 +14,10 @@ For more information about the L-BFGS method, see:
 * J. Nocedal, "Updating quasi-Newton matrices with limited storage," in *Mathematics of Computation*, vol. 35, issue 151, pp. 773-782 (1980).
 * D. Liu, J. Nocedal, "On the limited memory BFGS method for large scale optimization," in *Mathematical Programming*, vol. 45, pp. 503-528 (1989).
 
-The header file `libLBFGS.h` exposes the following routines:
+## How to use it
+
+Simply `#include "libLBFGS.h"` in your C source code to start using the routines
+implemented in the library. The header file `libLBFGS.h` exposes the following routines:
 
 * `libLBFGS_buffer * libLBFGS_init (int n, int mem);`  
     Initialize a libLBFGS_buffer structure.  
