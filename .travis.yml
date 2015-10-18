@@ -4,10 +4,8 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -y valgrind
 script:
-  - make debug
-  - valgrind tests/test_1
   - make
+  - valgrind tests/test_1
   - tests/test_1
 notifications:
   email: false
-
