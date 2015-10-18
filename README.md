@@ -5,19 +5,19 @@
 `libLBFGS` is a small piece of C code implementing all that is needed to compute
 limited-memory BFGS (also known as L-BFGS) directions when minimizing smooth functions.
 
-It implements the functions to allocate a FIFO buffer for some vectors to be stored,
-to push pairs of vectors `(s, y)` into the buffer, and to compute matrix vector products
-with the resulting approximate inverse Hessian matrix.
+It implements the necessary functions to allocate a FIFO buffer, for some pairs of vectors to be stored;
+to cyclically push and pull pairs `(s, y)` of vectors into the buffer; to compute matrix vector
+products with the resulting approximate inverse Hessian matrix.
 
 For more information about the L-BFGS method, see:
 
 * J. Nocedal, "Updating quasi-Newton matrices with limited storage," in *Mathematics of Computation*, vol. 35, issue 151, pp. 773-782 (1980). [Available here](http://www.ams.org/journals/mcom/1980-35-151/S0025-5718-1980-0572855-7/)
 * D. Liu, J. Nocedal, "On the limited memory BFGS method for large scale optimization," in *Mathematical Programming*, vol. 45, pp. 503-528 (1989). [Available here](http://link.springer.com/article/10.1007%2FBF01589116)
 
-## How to use it
+## How to use it (Linux/Unix/MacOS X)
 
-Simply `#include "libLBFGS.h"` in your C source code to start using the routines
-implemented in the library. The header file `libLBFGS.h` exposes the following routines:
+To compile the library simply type `make`. This will produce `libLBFGS.o`, that you
+will need to statically link to your project. The following routines are exported in `libLBFGS.h`:
 
 * `libLBFGS_buffer * libLBFGS_init (int n, int mem);`  
     Initialize a libLBFGS_buffer structure.  
@@ -52,4 +52,3 @@ implemented in the library. The header file `libLBFGS.h` exposes the following r
     Deallocates the given buffer structure: all the referenced memory locations will be cleared, including the buffer itself, and the pointer will no longer be usable.  
     **Parameters**  
      `libLBFGS_buffer * b`: pointer to the buffer structure
-
