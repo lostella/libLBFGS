@@ -44,7 +44,7 @@ int main(void) {
         }
         libLBFGS_push(b, s, y);
     }
-    libLBFGS_matvec(b, g, d);
+    libLBFGS_matvec(b, 1.0, g, d);
     libLBFGS_clear(b);
     // initialize the buffer
     b = libLBFGS_init(10, 3);
@@ -57,7 +57,7 @@ int main(void) {
         }
         libLBFGS_push(b, s, y);
     }
-    libLBFGS_matvec(b, g, d);
+    libLBFGS_matvec(b, 1.0, g, d);
     libLBFGS_clear(b);
     // initialize the buffer
     b = libLBFGS_init(10, 6);
@@ -70,7 +70,7 @@ int main(void) {
         }
         libLBFGS_push(b, s, y);
     }
-    libLBFGS_matvec(b, g, d);
+    libLBFGS_matvec(b, 1.0, g, d);
     libLBFGS_clear(b);
     // initialize the buffer
     b = libLBFGS_init(10, 10);
@@ -83,7 +83,7 @@ int main(void) {
         }
         libLBFGS_push(b, s, y);
     }
-    libLBFGS_matvec(b, g, d);
+    libLBFGS_matvec(b, 1.0, g, d);
     libLBFGS_clear(b);
     return 0;
 }
