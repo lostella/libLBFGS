@@ -4,6 +4,7 @@ function dir = lbfgs(S, Y, YS, H0, g, idx, currmem)
 %   S, an n-times-mem matrix
 %   Y, an n-times-mem matrix
 %   YS, a vector of length mem
+%	H0, a positive real number
 %   g, a vector of length n
 %   idx, a 32 bit integer (use int32(var) when passing integer var here)
 %   currmem, a 32 bit integer (use int32(var) when passing integer var here)
