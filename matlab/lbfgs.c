@@ -19,8 +19,8 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
   int n, mem, curridx, currmem, dir_dims[2];
   double * dir, * s, * y, * ys, H, * g, * alpha;
 
-  if (nrhs != 6) {
-    mexErrMsgTxt("LBFGS: you should provide exactly 6 arguments.");
+  if (nrhs != 7) {
+    mexErrMsgTxt("LBFGS: you should provide exactly 7 arguments.");
     return;
   }
   if (nlhs > 1) {
@@ -39,25 +39,30 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     mexErrMsgTxt("LBFGS: 3rd argument must be a double, dense vector.");
     return;
   }
-  if (!IS_REAL_DENSE_VEC(prhs[3])) {
-    mexErrMsgTxt("LBFGS: 4th argument must be a double, dense vector.");
+  if (!IS_REAL_SCALAR(prhs[3])) {
+    mexErrMsgTxt("LBFGS: 4rd argument must be a double scalar.");
     return;
   }
-  if (!IS_INT32_SCALAR(prhs[4])) {
-    mexErrMsgTxt("LBFGS: 5th argument must be a 32-bit integer.");
+  if (!IS_REAL_DENSE_VEC(prhs[4])) {
+    mexErrMsgTxt("LBFGS: 5th argument must be a double, dense vector.");
     return;
   }
   if (!IS_INT32_SCALAR(prhs[5])) {
     mexErrMsgTxt("LBFGS: 6th argument must be a 32-bit integer.");
     return;
   }
+  if (!IS_INT32_SCALAR(prhs[6])) {
+    mexErrMsgTxt("LBFGS: 7th argument must be a 32-bit integer.");
+    return;
+  }
 
   s = mxGetPr(prhs[0]);
   y = mxGetPr(prhs[1]);
   ys = mxGetPr(prhs[2]);
-  g = mxGetPr(prhs[3]);
-  curridx = (int)mxGetScalar(prhs[4])-1;
-	currmem = (int)mxGetScalar(prhs[5]);
+  H = mxGetScalar(prhs[3]);
+  g = mxGetPr(prhs[4]);
+  curridx = (int)mxGetScalar(prhs[5])-1;
+	currmem = (int)mxGetScalar(prhs[6]);
 
   n = mxGetDimensions(prhs[0])[0];
   mem = mxGetDimensions(prhs[0])[1];
@@ -81,7 +86,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
   b.y_n_m = y;
   b.ys_m = ys;
   b.alpha_m = alpha;
-  libLBFGS_matvec(&b, g, dir);
+  libLBFGS_matvec(&b, H, g, dir);
   /***************/
 
 	mxFree(alpha);

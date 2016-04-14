@@ -1,4 +1,4 @@
-function dir = lbfgs(S, Y, YS, g, idx, mem)
+function dir = lbfgs(S, Y, YS, H0, g, idx, currmem)
 % dir = LBFGS(S, Y, YS, g, idx, mem)
 %
 %   S, an n-times-mem matrix
@@ -6,7 +6,7 @@ function dir = lbfgs(S, Y, YS, g, idx, mem)
 %   YS, a vector of length mem
 %   g, a vector of length n
 %   idx, a 32 bit integer (use int32(var) when passing integer var here)
-%   mem, a 32 bit integer (use int32(var) when passing integer var here)
+%   currmem, a 32 bit integer (use int32(var) when passing integer var here)
 %
 % Computes the L-BFGS direction associated with
 % gradient g and mem pairs (s, y), where
@@ -19,3 +19,22 @@ function dir = lbfgs(S, Y, YS, g, idx, mem)
 % so that no memcpy operation is needed every time
 % the matrices are full and new columns need to be
 % stored.
+
+maxmem = size(S, 2);
+alpha = zeros(1, maxmem);
+q = g;
+curridx = idx;
+for i = 0:(currmem-1)
+    alpha(curridx) = (S(:,curridx)'*q)/YS(curridx);
+    q = q - alpha(curridx)*Y(:,curridx);
+    curridx = curridx-1;
+    if curridx == 0, curridx = maxmem; end
+end
+r = H0*q;
+for i = 0:(currmem-1)
+    curridx = curridx+1;
+    if curridx > maxmem, curridx = 1; end
+    beta = (Y(:,curridx)'*r)/YS(curridx);
+    r = r + (alpha(curridx)-beta)*S(:,curridx);
+end
+dir = r;

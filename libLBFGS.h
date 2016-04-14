@@ -43,7 +43,7 @@ int                 libLBFGS_push   (libLBFGS_buffer * b, double * s, double * y
         double * d: pointer to n-dimensional double vector, where to store the
             result of the matrix-vector product.
 */
-int                 libLBFGS_matvec (libLBFGS_buffer * b, double * g, double * d);
+int                 libLBFGS_matvec (libLBFGS_buffer * b, double H, double * g, double * d);
 
 /*
     Resets the memory of the given buffer structure.

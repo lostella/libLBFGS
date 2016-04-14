@@ -29,7 +29,7 @@ int libLBFGS_push(libLBFGS_buffer * b, double * s, double * y) {
     return 0;
 }
 
-int libLBFGS_matvec(libLBFGS_buffer * b, double * g_n, double * dir_n) {
+int libLBFGS_matvec(libLBFGS_buffer * b, double H, double * g_n, double * dir_n) {
     double beta;
     int i, j, k;
     int n = b->n;
@@ -40,19 +40,6 @@ int libLBFGS_matvec(libLBFGS_buffer * b, double * g_n, double * dir_n) {
     double * y_n_m = b->y_n_m;
     double * ys_m = b->ys_m;
     double * alpha_m = b->alpha_m;
-    double H;
-
-    if (currmem > 0) {
-        double yy = 0, curry;
-        for (i=0; i<n; i++) {
-            curry = y_n_m[(curridx)*n+i];
-            yy += curry*curry;
-        }
-        H = ys_m[curridx]/yy;
-    }
-    else {
-        H = 1.0;
-    }
 
     for (j=0; j<n; j++) dir_n[j] = g_n[j];
 
