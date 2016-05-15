@@ -2,10 +2,10 @@
 
 [![Build Status](https://travis-ci.org/lostella/libLBFGS.svg)](https://travis-ci.org/lostella/libLBFGS)
 
-`libLBFGS` is a small piece of C code implementing all that is needed to compute
-limited-memory BFGS (also known as L-BFGS) directions when minimizing smooth functions.
+`libLBFGS` is a small piece of C code computing
+limited-memory BFGS (also known as L-BFGS) directions for minimizing smooth functions.
 
-It implements the necessary functions to allocate a FIFO buffer, for some pairs of vectors to be stored;
+It implements the necessary functions to allocate a FIFO buffer for some pairs of vectors to be stored;
 to cyclically push and pull pairs `(s, y)` of vectors into the buffer; to compute matrix vector
 products with the resulting approximate inverse Hessian matrix.
 
@@ -16,26 +16,27 @@ For more information about the L-BFGS method, see:
 
 ## How to use it (Linux/Unix/MacOS X)
 
-To compile the library simply type `make`. This will produce `libLBFGS.o`, that you
-will need to statically link to your project. The following routines are exported in `libLBFGS.h`:
+To compile the library simply navigate to its directory and type `make`.
+This will produce `libLBFGS.o`, that you will need to statically link to your project.
+The following routines are exported in `libLBFGS.h`:
 
 * `libLBFGS_buffer * libLBFGS_init (int n, int mem);`
     Initialize a libLBFGS_buffer structure.
 
-    **Parameters**
+    * Parameters
     
      `int n`: dimension of the vectors to handle
 
      `int mem`: memory of the buffer
 
-    **Return value**
+    * Return value
     
      `libLBFGS_buffer * b`: pointer to the buffer structure
 
 * `int libLBFGS_push (libLBFGS_buffer * b, double * s, double * y);`
     Pushes a new pair (s, y) into the buffer, and discards the oldest one if necessary.
 
-    **Parameters**
+    * Parameters
 
      `libLBFGS_buffer * b`: pointer to the buffer structure
 
@@ -43,7 +44,7 @@ will need to statically link to your project. The following routines are exporte
 
      `double * y`: pointer to n-dimensional double vector, containing the difference between the two gradients at x and x'
 
-    **Return value**
+    * Return value
 
      `int status`: some integer status code
 
@@ -51,7 +52,7 @@ will need to statically link to your project. The following routines are exporte
 
     Performs a MATVEC operation between the inverse Hessian approximation stored so far and a given vector.
 
-    **Parameters**
+    * Parameters
 
      `libLBFGS_buffer * b`: pointer to the buffer structure
 
@@ -65,7 +66,7 @@ will need to statically link to your project. The following routines are exporte
 
     Resets the memory of the given buffer structure.
 
-    **Parameters**
+    * Parameters
 
      `libLBFGS_buffer * b`: pointer to the buffer structure
 
@@ -73,6 +74,6 @@ will need to statically link to your project. The following routines are exporte
 
     Deallocates the given buffer structure: all the referenced memory locations will be cleared, including the buffer itself, and the pointer will no longer be usable.
 
-    **Parameters**
+    * Parameters
     
      `libLBFGS_buffer * b`: pointer to the buffer structure
