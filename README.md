@@ -40,9 +40,9 @@ The following routines are exported in `libLBFGS.h`:
 
      `libLBFGS_buffer * b`: pointer to the buffer structure
 
-     `double * s`: pointer to n-dimensional double vector, containing the difference between to points x and x'
+     `double * s`: double vector of length n, containing the difference between to points x and x'
 
-     `double * y`: pointer to n-dimensional double vector, containing the difference between the two gradients at x and x'
+     `double * y`: double vector of length n, containing the difference between the two gradients at x and x'
 
     * Return value
 
@@ -58,9 +58,9 @@ The following routines are exported in `libLBFGS.h`:
 
      `double H0`: value of the diagonal initial Hessian approximation to use; can be any positive value, a good choice for this is suggested in Nocedal, Wright, "Numerical Optimization", eq. (7.20)
 
-     `double * g`: pointer to n-dimensional double vector, containing the vector to multiply with the inverse Hessian approximation
+     `double * g`: double vector of length n, containing the vector to multiply with the inverse Hessian approximation
 
-     `double * d`: pointer to n-dimensional double vector, where to store the result of the matrix-vector product
+     `double * d`: double vector of length n, where to store the result of the matrix-vector product
 
 * `void libLBFGS_reset (libLBFGS_buffer * b);`
 
