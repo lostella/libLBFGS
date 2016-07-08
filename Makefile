@@ -13,4 +13,4 @@ libLBFGS.o:		libLBFGS.c libLBFGS.h
 	$(CC) $(CFLAGS) $(OPTIM) libLBFGS.c
 
 clean:
-	rm libLBFGS.o tests/test_1
+	rm -f libLBFGS.o tests/test_1

@@ -57,7 +57,7 @@ for i=1:5
         S(:,col) = Sk;
         Y(:,col) = Yk;
         YS(col) = YSk;
-        H0 = YSk/(Yk'*Yk)
+        H0 = YSk/(Yk'*Yk);
     end
     dir = lbfgs(S, Y, YS, H0, -grad, int32(col), int32(currmem));
     dirs = [dirs, dir];
