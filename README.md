@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/lostella/libLBFGS.svg)](https://travis-ci.org/lostella/libLBFGS)
 
 `libLBFGS` is a small piece of C code computing
-limited-memory BFGS (also known as L-BFGS) directions for minimizing smooth functions.
+limited-memory BFGS (also known as L-BFGS) directions for minimizing smooth functions. Contains a MATLAB's MEX interface.
 
 It implements the necessary functions to allocate a FIFO buffer for some pairs of vectors to be stored;
 to cyclically push and pull pairs `(s, y)` of vectors into the buffer; to compute matrix vector
