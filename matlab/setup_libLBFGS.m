@@ -1,4 +1,4 @@
-mex lbfgs.c ../libLBFGS.c
-libLBFGS_path = fileparts(mfilename('fullpath'));
-full_path = fullfile(libLBFGS_path, 'matlab');
+mex lbfgs_mex.c ../libLBFGS.c
+libLBFGS_matlab_path = fileparts(mfilename('fullpath'));
+addpath(libLBFGS_matlab_path);
 savepath;

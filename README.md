@@ -3,18 +3,35 @@
 [![Build Status](https://travis-ci.org/lostella/libLBFGS.svg)](https://travis-ci.org/lostella/libLBFGS)
 
 `libLBFGS` is a small piece of C code computing
-limited-memory BFGS (also known as L-BFGS) directions for minimizing smooth functions.
+limited-memory BFGS (also known as L-BFGS) directions for minimizing smooth functions. Contains a MATLAB interface [briefly documented here](#MATLAB-interface).
 
-It implements the necessary functions to allocate a FIFO buffer for some pairs of vectors to be stored;
-to cyclically push and pull pairs `(s, y)` of vectors into the buffer; to compute matrix vector
-products with the resulting approximate inverse Hessian matrix.
+The library implements the necessary functions to allocate a FIFO buffer for some pairs of vectors to be stored;
+to cyclically push and pull pairs `(s, y)` of vectors into the buffer;
+to compute matrix vector products with the resulting approximate inverse Hessian matrix.
 
 For more information about the L-BFGS method, see:
 
 * J. Nocedal, "Updating quasi-Newton matrices with limited storage," in *Mathematics of Computation*, vol. 35, issue 151, pp. 773-782 (1980). [Available here](http://www.ams.org/journals/mcom/1980-35-151/S0025-5718-1980-0572855-7/)
 * D. Liu, J. Nocedal, "On the limited memory BFGS method for large scale optimization," in *Mathematical Programming*, vol. 45, pp. 503-528 (1989). [Available here](http://link.springer.com/article/10.1007%2FBF01589116)
 
-## How to use it (Linux/Unix/MacOS X)
+## MATLAB interface
+
+To setup `libLBFGS` for MATLAB, navigate to `libLBFGS/matlab` from your MATLAB command line and
+
+```matlab
+>> setup_libLBFGS
+>> test_libLBFGS
+```
+
+Now you can use `libLBFGS`. The easiest way is through the `LBFGS` class:
+
+```matlab
+H = LBFGS(n, mem); % create an operator of dimension n and memory mem
+H.push(s, y);      % push a pair (s, y) into the buffer and update the operator
+d = -(H*grad);     % multiply H by (minus) grad, to obtain a search direction
+```
+
+## C interface (Linux/Unix/MacOS X)
 
 To compile the library simply navigate to its directory and type `make`.
 This will produce `libLBFGS.o`, that you will need to statically link to your project.
@@ -24,13 +41,13 @@ The following routines are exported in `libLBFGS.h`:
     Initialize a libLBFGS_buffer structure.
 
     * Parameters
-    
+
      `int n`: dimension of the vectors to handle
 
      `int mem`: memory of the buffer
 
     * Return value
-    
+
      `libLBFGS_buffer * b`: pointer to the buffer structure
 
 * `int libLBFGS_push (libLBFGS_buffer * b, double * s, double * y);`
@@ -75,5 +92,5 @@ The following routines are exported in `libLBFGS.h`:
     Deallocates the given buffer structure: all the referenced memory locations will be cleared, including the buffer itself, and the pointer will no longer be usable.
 
     * Parameters
-    
+
      `libLBFGS_buffer * b`: pointer to the buffer structure

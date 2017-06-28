@@ -20,39 +20,39 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
   double * dir, * s, * y, * ys, H, * g, * alpha;
 
   if (nrhs != 7) {
-    mexErrMsgTxt("LBFGS: you should provide exactly 7 arguments.");
+    mexErrMsgTxt("lbfgs_mex: you should provide exactly 7 arguments.");
     return;
   }
   if (nlhs > 1) {
-    mexErrMsgTxt("LBFGS: too many output arguments.");
+    mexErrMsgTxt("lbfgs_mex: too many output arguments.");
     return;
   }
   if (!IS_REAL_DENSE_MAT(prhs[0])) {
-    mexErrMsgTxt("LBFGS: 1st argument must be a double, dense matrix.");
+    mexErrMsgTxt("lbfgs_mex: 1st argument must be a double, dense matrix.");
     return;
   }
   if (!IS_REAL_DENSE_MAT(prhs[1])) {
-    mexErrMsgTxt("LBFGS: 2nd argument must be a double, dense matrix.");
+    mexErrMsgTxt("lbfgs_mex: 2nd argument must be a double, dense matrix.");
     return;
   }
   if (!IS_REAL_DENSE_VEC(prhs[2])) {
-    mexErrMsgTxt("LBFGS: 3rd argument must be a double, dense vector.");
+    mexErrMsgTxt("lbfgs_mex: 3rd argument must be a double, dense vector.");
     return;
   }
   if (!IS_REAL_SCALAR(prhs[3])) {
-    mexErrMsgTxt("LBFGS: 4rd argument must be a double scalar.");
+    mexErrMsgTxt("lbfgs_mex: 4rd argument must be a double scalar.");
     return;
   }
   if (!IS_REAL_DENSE_VEC(prhs[4])) {
-    mexErrMsgTxt("LBFGS: 5th argument must be a double, dense vector.");
+    mexErrMsgTxt("lbfgs_mex: 5th argument must be a double, dense vector.");
     return;
   }
   if (!IS_INT32_SCALAR(prhs[5])) {
-    mexErrMsgTxt("LBFGS: 6th argument must be a 32-bit integer.");
+    mexErrMsgTxt("lbfgs_mex: 6th argument must be a 32-bit integer.");
     return;
   }
   if (!IS_INT32_SCALAR(prhs[6])) {
-    mexErrMsgTxt("LBFGS: 7th argument must be a 32-bit integer.");
+    mexErrMsgTxt("lbfgs_mex: 7th argument must be a 32-bit integer.");
     return;
   }
 
@@ -76,7 +76,6 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
   plhs[0] = mxCreateNumericArray(2, dir_dims, mxDOUBLE_CLASS, mxREAL);
   dir = mxGetPr(plhs[0]);
 
-  /* added these */
   libLBFGS_buffer b;
   b.n = n;
   b.mem = mem;
@@ -87,7 +86,6 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
   b.ys_m = ys;
   b.alpha_m = alpha;
   libLBFGS_matvec(&b, H, g, dir);
-  /***************/
 
 	mxFree(alpha);
 }

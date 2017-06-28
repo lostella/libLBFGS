@@ -21,7 +21,7 @@ xs = [1.0,0.01,0.02,0.03,0.04,0.05,0.06,0.07,0.08,0.09; ...
       0.08,0.09,1.0,0.01,0.02,0.03,0.04,0.05,0.06,0.07; ...
       0.07,0.08,0.09,1.0,0.01,0.02,0.03,0.04,0.05,0.06; ...
       0.06,0.07,0.08,0.09,1.0,0.01,0.02,0.03,0.04,0.05]';
-  
+
 dirs_ref = [ ...
     -3.476000000000000e+01    -6.861170733797231e-01    -1.621334774299757e-01    -2.008976150849174e-01    -2.317011191832649e-01;
     -1.367700000000000e+01    -1.661270665201917e+00     2.870743130038511e-01     2.237224648542354e-01     2.980080835636926e-02;
@@ -36,14 +36,7 @@ dirs_ref = [ ...
 
 dirs = []; % matrix of directions (to be filled in)
 
-mem = 3;
-col = 0; % last column of Sk, Yk that was filled in
-currmem = 0;
-
-S = zeros(10, 3);
-Y = zeros(10, 3);
-YS = zeros(1, 3);
-H0 = 1;
+H = LBFGS(10, 3);
 
 for i=1:5
     x = xs(:,i);
@@ -51,22 +44,13 @@ for i=1:5
     if i > 1
         Sk = x-x_old;
         Yk = grad-grad_old;
-        YSk = Yk'*Sk;
-        col = 1+mod(col, mem);
-        currmem = min(currmem+1, mem);
-        S(:,col) = Sk;
-        Y(:,col) = Yk;
-        YS(col) = YSk;
-        H0 = YSk/(Yk'*Yk);
+        H.push(Sk, Yk);
     end
-    dir = lbfgs(S, Y, YS, H0, -grad, int32(col), int32(currmem));
-    dirs = [dirs, dir];
+    d = -(H*grad);
+    dirs = [dirs, d];
     x_old = x;
     grad_old = grad;
 end
 
-if norm(dirs-dirs_ref, inf) <= 1e-12
-    disp('test passed');
-else
-    disp('test failed');
-end
+assert(norm(dirs-dirs_ref, inf) <= 1e-12)
+disp('test passed')

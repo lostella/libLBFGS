@@ -7,4 +7,4 @@ tests/test_1.dSYM/Contents/Info.plist
 
 tests/test_1.dSYM/Contents/Resources/DWARF/test_1
 
-matlab/lbfgs.mexmaci64
+matlab/*.mexmaci64
