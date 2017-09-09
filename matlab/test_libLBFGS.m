@@ -36,7 +36,7 @@ dirs_ref = [ ...
 
 dirs = []; % matrix of directions (to be filled in)
 
-H = LBFGS(10, 3);
+H = LBFGS(3);
 
 for i=1:5
     x = xs(:,i);
